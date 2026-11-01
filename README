@@ -1,3 +1,4 @@
+G = ( Σmembres numéro d'inscription ) mod 10 000 si la liste esy vide G prend la valeur 1234
 config.py : 
 Nous avons créé une liste contenant les numéros d'inscription des membres du groupe afin de 
 calculer une graine G. Si la liste est vide, nous utilisons 1234 comme valeur par défaut pour 
@@ -6,3 +7,32 @@ Nous avons utilisé G pour obtenir une valeur propre à chaque groupe à partir 
 d'inscription. Cette valeur permet de personnaliser le nombre de passages supplémentaires dans 
 la carte de la Médina.
 En un mot, c'est le fichier qui contient les parametres utile a la creation de la carte
+structure.py :
+## Présentation
+Cette partie implémente deux structures de données : une pile (LIFO) et une file (FIFO). La file est construite à partir de deux piles.
+
+## 1. Pile (LIFO)
+LIFO signifie « Dernier entré, premier sorti ».
+
+Le dernier élément ajouté est le premier à être retiré.
+
+Méthodes principales :
+- `push(x)` : ajoute un élément.
+- `pop()` : retire et retourne le dernier élément.
+- `top()` : retourne le dernier élément sans le retirer.
+- `is_empty()` : vérifie si la pile est vide.
+- `__len__()` : retourne le nombre d'éléments.
+## 2. File (FIFO)
+FIFO signifie « Premier entré, premier sorti ».
+
+Le premier élément ajouté est le premier à être retiré.
+
+La file utilise exactement deux piles :
+- `_entree` : reçoit les nouveaux éléments.
+- `_sortie` : permet de retirer les éléments dans le bon ordre.
+
+Méthodes principales :
+- `enqueue(x)` : ajoute un élément à la file.
+- `dequeue()` : retire et retourne le plus ancien élément.
+- `is_empty()` : vérifie si la file est vide.
+- `__len__()` : retourne le nombre total d'éléments.
