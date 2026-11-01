@@ -1,0 +1,8 @@
+config.py : 
+Nous avons créé une liste contenant les numéros d'inscription des membres du groupe afin de 
+calculer une graine G. Si la liste est vide, nous utilisons 1234 comme valeur par défaut pour 
+éviter que le programme ne rencontre un problème lors du calcul
+Nous avons utilisé G pour obtenir une valeur propre à chaque groupe à partir de ses numéros 
+d'inscription. Cette valeur permet de personnaliser le nombre de passages supplémentaires dans 
+la carte de la Médina.
+En un mot, c'est le fichier qui contient les parametres utile a la creation de la carte
