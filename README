@@ -36,3 +36,71 @@ Méthodes principales :
 - `dequeue()` : retire et retourne le plus ancien élément.
 - `is_empty()` : vérifie si la file est vide.
 - `__len__()` : retourne le nombre total d'éléments.
+
+## 1.2. Génération et visualisation de la carte de la Médina
+
+La Médina est représentée par une grille de dimensions P × Q (20 × 30), composée de cases reliées par des passages ou séparées par des murs.
+
+### Génération du labyrinthe
+
+La génération de la carte repose sur l'algorithme DFS (Depth-First Search) itératif, utilisant une pile pour parcourir les cases.
+
+Le processus comprend :
+- Le choix aléatoire d'une case de départ.
+- L'exploration des cases voisines non visitées.
+- La suppression des murs entre les cases parcourues.
+- Le retour en arrière lorsqu'aucun voisin non visité n'est disponible.
+
+L'ordre d'exploration des directions est fixé : Nord, Sud, Est, Ouest.
+
+Après la génération du labyrinthe parfait, des passages supplémentaires sont ouverts afin de créer plusieurs possibilités de déplacement.
+
+### Reproductibilité
+
+Une graine aléatoire G est utilisée pour garantir la reproductibilité de la carte.
+
+La graine est calculée à partir des numéros d'inscription des membres du groupe :
+
+G = somme des numéros d'inscription mod 10000.
+
+Si la liste est vide, la valeur par défaut est 1234.
+
+Le nombre de passages supplémentaires est calculé comme suit :
+
+K_PASSAGES = 60 + (G mod 41).
+
+Une même graine produit la même carte, ce qui permet de comparer les algorithmes de recherche dans les mêmes conditions.
+
+### Coûts des déplacements
+
+Chaque case possède un coût de déplacement :
+
+| Type de case | Coût |
+|---|---:|
+| Zone normale | 1 |
+| Escalier | 2 |
+| Zone de souk | 3 |
+
+Les escaliers sont sélectionnés aléatoirement avec un générateur indépendant, à hauteur de 5 % des cases candidates.
+
+Les cases des points d'intérêt et des souks sont exclues de cette sélection.
+
+Le coût d'un chemin correspond à la somme des coûts des cases traversées, sans compter la case de départ.
+
+### Visualisation 2D
+
+La carte est affichée avec Matplotlib.
+
+La représentation utilise :
+- Beige pour les zones normales.
+- Jaune pour les escaliers.
+- Orange pour les souks.
+- Des traits foncés pour représenter les murs.
+- Des marqueurs pour identifier les points d'intérêt.
+- Des couleurs distinctes pour visualiser les chemins et les cases explorées par les algorithmes.
+
+La carte peut être exportée au format PNG pour être intégrée au rapport.
+
+### Objectif
+
+Cette carte constitue un environnement commun pour tester et comparer les algorithmes de recherche, notamment BFS, DFS, Dijkstra et A*, selon plusieurs critères : nombre de cases explorées, longueur du chemin, coût total et temps d'exécution.
