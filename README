@@ -201,3 +201,50 @@ L'objectif est de comparer les différents algorithmes dans un même environneme
 Cette comparaison permet d'étudier les différences entre les méthodes de recherche non informées (BFS et DFS), les méthodes optimales tenant compte des coûts (Dijkstra et A*) et les méthodes guidées par une heuristique (recherche gloutonne).
 
 Elle permet également d'identifier les situations dans lesquelles chaque algorithme est le plus performant.
+fichier tsp.py : 
+## 1.4. Optimisation du circuit du guide (TSP)
+
+### Objectif
+
+Trouver le meilleur circuit permettant de visiter les 12 points d'intérêt de la Médina, en commençant par le point 0 et en revenant au point de départ.
+
+Il s'agit du problème du voyageur de commerce (TSP – Travelling Salesman Problem).
+
+Une tournée :
+
+- Commence toujours par le point 0.
+- Visite chaque point une seule fois.
+- Inclut le retour au point de départ dans son coût.
+
+### 1.4.1. Matrice des coûts
+
+Une matrice `M` stocke le coût du chemin entre chaque paire de points.
+
+Les coûts sont calculés avec A\* et l'heuristique Manhattan.
+
+Pour 12 points, cela nécessite 132 appels à A\*.
+
+### 1.4.2. Algorithmes utilisés
+
+| Algorithme           | Principe                                                                  | Optimalité |
+| -------------------- | ------------------------------------------------------------------------- | ---------- |
+| Plus proche voisin   | Choisit le point le plus proche non visité.                               | Non        |
+| Held-Karp            | Programmation dynamique sur les sous-ensembles.                           | Oui        |
+| 2-opt                | Améliore une tournée par inversion de segments.                           | Non        |
+| Recuit simulé        | Accepte parfois des solutions moins bonnes pour éviter les optima locaux. | Non        |
+| Algorithme génétique | Utilise sélection, croisement, mutation et élitisme.                      | Non        |
+| Branch and Bound     | Élimine les branches qui ne peuvent pas améliorer la meilleure solution.  | Oui        |
+
+### 1.4.3. Critères de comparaison
+
+Les algorithmes sont évalués selon :
+
+- Le coût total de la tournée.
+- Le temps d'exécution.
+- La qualité de la solution.
+- Le nombre de nœuds explorés.
+- La convergence et la diversité des solutions.
+
+### Objectif final
+
+Comparer les méthodes exactes et heuristiques afin de déterminer lesquelles offrent le meilleur compromis entre qualité de la tournée et temps d'exécution.
