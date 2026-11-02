@@ -248,3 +248,54 @@ Les algorithmes sont évalués selon :
 ### Objectif final
 
 Comparer les méthodes exactes et heuristiques afin de déterminer lesquelles offrent le meilleur compromis entre qualité de la tournée et temps d'exécution.
+Partie 3:
+csp.py
+## 1.5. Réaménagement du souk (CSP)
+
+### Objectif
+
+Cette partie consiste à organiser les différents commerces du souk en respectant plusieurs contraintes d'emplacement.
+
+Le problème est modélisé comme un CSP (Constraint Satisfaction Problem), composé de variables, de domaines et de contraintes.
+
+### 1.5.1. Modélisation du problème
+
+- Variables : 8 commerces (PA, PB, CH, DI, BI, TI, LI, PT).
+- Domaines : positions possibles de 1 à 10.
+- Contraintes : chaque commerce doit respecter des règles de positionnement.
+
+Les principales contraintes sont :
+
+- Tous les commerces doivent occuper des positions différentes.
+- PA et PB doivent être proches de la mosquée et ne pas être voisins.
+- Le commerce de cuivre (DI) doit être éloigné de PA et PB.
+- DI doit être dans une zone calme.
+- LI doit être placé dans les positions 8, 9 ou 10.
+- BI et TI doivent être voisins.
+- CH doit être proche de TI.
+- PT doit être éloigné de DI.
+
+Une option supplémentaire permet d'ajouter des contraintes liées à l'éclairage.
+
+### 1.5.2. Algorithmes utilisés
+
+| Méthode          | Principe                                                                                       |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| Backtracking     | Explore les affectations et revient en arrière en cas de conflit.                              |
+| MRV              | Choisit la variable ayant le moins de valeurs possibles.                                       |
+| Degré            | Privilégie les variables ayant le plus de contraintes avec les autres variables non affectées. |
+| Forward Checking | Réduit les domaines des variables voisines après chaque affectation.                           |
+| AC-3             | Élimine les valeurs incompatibles afin de rendre les arcs cohérents.                           |
+
+### 1.5.3. Critères de comparaison
+
+Les méthodes sont évaluées selon :
+
+- Le nombre de solutions trouvées.
+- Le nombre de nœuds explorés.
+- Le nombre de retours en arrière.
+- Le temps d'exécution.
+
+### Objectif final
+
+Comparer les différentes techniques de résolution afin de déterminer comment les heuristiques et la propagation des contraintes améliorent l'efficacité de l'organisation du souk.
