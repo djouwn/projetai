@@ -40,7 +40,7 @@ Méthodes principales :
 ## 1.2. Génération et visualisation de la carte de la Médina
 
 La Médina est représentée par une grille de dimensions P × Q (20 × 30), composée de cases reliées par des passages ou séparées par des murs.
-
+fichier : medina.py
 ### Génération du labyrinthe
 
 La génération de la carte repose sur l'algorithme DFS (Depth-First Search) itératif, utilisant une pile pour parcourir les cases.
@@ -104,3 +104,100 @@ La carte peut être exportée au format PNG pour être intégrée au rapport.
 ### Objectif
 
 Cette carte constitue un environnement commun pour tester et comparer les algorithmes de recherche, notamment BFS, DFS, Dijkstra et A*, selon plusieurs critères : nombre de cases explorées, longueur du chemin, coût total et temps d'exécution.
+
+fichier recherche.py
+## 1.3. Algorithmes de recherche dans la Médina
+
+Cette partie implémente plusieurs algorithmes de recherche permettant de trouver un chemin entre deux points de la Médina.
+
+Chaque algorithme retourne trois informations :
+
+- Le chemin trouvé entre le départ et l'arrivée.
+- Le coût total du chemin.
+- Le nombre de cases explorées (cases retirées de la frontière).
+
+Une option `trace` permet également de mémoriser les cases développées afin de visualiser le comportement des algorithmes.
+
+### Algorithmes implémentés
+
+#### 1. Recherche en largeur (BFS)
+
+BFS (Breadth-First Search) explore les cases niveau par niveau en utilisant une file FIFO.
+
+Il permet de trouver un chemin contenant le nombre minimal de déplacements lorsque toutes les transitions ont le même poids.
+
+Dans notre projet, les cases possèdent des coûts différents. BFS ne garantit donc pas nécessairement le chemin de coût minimal.
+
+#### 2. Recherche en profondeur (DFS)
+
+DFS (Depth-First Search) explore une branche aussi loin que possible avant de revenir en arrière.
+
+Il utilise une pile LIFO.
+
+Cet algorithme peut trouver rapidement un chemin, mais ne garantit ni le nombre minimal de déplacements ni le coût minimal.
+
+#### 3. Recherche à coût uniforme (Dijkstra)
+
+Dijkstra sélectionne toujours la case ayant le coût cumulé le plus faible depuis le départ.
+
+Il utilise une file de priorité (tas).
+
+Il garantit un chemin de coût minimal lorsque les coûts des déplacements sont positifs ou nuls.
+
+#### 4. Recherche A*
+
+A* combine le coût déjà parcouru et une estimation du coût restant.
+
+Sa fonction d'évaluation est :
+
+f(n) = g(n) + w × h(n)
+
+Avec :
+
+- g(n) : coût réel depuis le départ jusqu'à la case actuelle.
+- h(n) : estimation du coût restant jusqu'à l'arrivée.
+- w : coefficient de pondération de l'heuristique.
+
+Lorsque w = 1 et que l'heuristique est admissible, A* garantit un chemin de coût minimal.
+
+#### 5. Recherche gloutonne (Greedy Best-First Search)
+
+La recherche gloutonne choisit la case qui semble la plus proche de l'objectif selon l'heuristique.
+
+Sa fonction d'évaluation est :
+
+f(n) = h(n)
+
+Elle peut être rapide, mais ne garantit pas le chemin de coût minimal.
+
+### Heuristiques utilisées
+
+Plusieurs heuristiques sont implémentées pour comparer les performances de A* et de la recherche gloutonne.
+
+| Heuristique | Formule |
+|---|---|
+| Nulle | h(n) = 0 |
+| Manhattan | \|x1 - x2\| + \|y1 - y2\| |
+| Euclidienne | Distance en ligne droite |
+| Tchebychev | max(\|x1 - x2\|, \|y1 - y2\|) |
+
+L'heuristique nulle transforme A* en Dijkstra.
+
+### Comparaison des algorithmes
+
+Les algorithmes sont évalués selon plusieurs critères :
+
+| Critère | Description |
+|---|---|
+| Longueur du chemin | Nombre de cases traversées |
+| Coût total | Somme des coûts des cases parcourues |
+| Cases explorées | Nombre de cases retirées de la frontière |
+| Temps d'exécution | Durée nécessaire pour trouver le chemin |
+
+### Objectif de cette partie
+
+L'objectif est de comparer les différents algorithmes dans un même environnement, avec les mêmes points de départ et d'arrivée.
+
+Cette comparaison permet d'étudier les différences entre les méthodes de recherche non informées (BFS et DFS), les méthodes optimales tenant compte des coûts (Dijkstra et A*) et les méthodes guidées par une heuristique (recherche gloutonne).
+
+Elle permet également d'identifier les situations dans lesquelles chaque algorithme est le plus performant.
